@@ -1,0 +1,39 @@
+{% extends "layout/base" %}
+
+{% block content %}
+<script type="text/javascript" src="{{ request.contextPath }}/resources/js/board.js"></script>
+<div>
+    <form name="frm" method="get">
+        <input type="hidden" name="pageNo" value="{{ search.pageNo }}">
+    </form>
+    Total : {{ search.totalCount }}
+    <table class="table">
+        <thead class="thead-dark">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">제목</th>
+            <th scope="col">내용</th>
+            <th scope="col">점수</th>
+            <th scope="col">등록일</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for board in boardList %}
+        <tr>
+            <th scope="row">{{ board.id }}</th>
+            <td>{{ board.title }}</td>
+            <td>{{ board.content }}</td>
+            <td>{{ scoreEval(board.score) }}</td>
+            <td>{{ board.regDate }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="4">데이터가 없습니다.</td>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+    <!--   페이징 처리 -->
+    {% include '/layout/paging' %}
+</div>
+{% endblock %}

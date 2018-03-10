@@ -1,0 +1,32 @@
+{% if search.totalCount > 0 %}
+<div class="paginate_wrap">
+    <div class="center">
+        {% if search.pageNo > 1 and search.sizeOfPage == 5 %}
+        <a href="javascript:goPage(1);"><strong>&lt;&lt;</strong></a>
+        <a href="javascript:goPage({{ search.pageNo -1 }})"><strong>&lt;</strong></a>
+        {% endif %}
+
+        {% for pageNo in range(search.startPageNo,search.startPageNo + search.sizeOfPage-1) %}
+        {% if pageNo == search.pageNo %}
+        {{ pageNo }}
+        {% else %}
+        <a href="javascript:goPage({{ pageNo }});"><strong>{{ pageNo }}</strong></a>
+        {% endif %}
+        {% endfor %}
+
+        {% if search.pageNo < search.finalPageNo and search.sizeOfPage ==5 %}
+        <a href="javascript:goPage({{ search.nextPageNo }});"><strong>&gt;</strong></a>
+        <a href="javascript:goPage({{ search.finalPageNo }});"><strong>&gt;&gt;</strong></a>
+        {% endif %}
+    </div>
+    <script>
+        function goPage(page) {
+            var form = $("form[name=frm]");
+            form.attr("target", "_self");
+            form.attr("method", "GET");
+            form.find("input[name='pageNo']").val(page);
+            form.submit();
+        }
+    </script>
+</div>
+{% endif %}

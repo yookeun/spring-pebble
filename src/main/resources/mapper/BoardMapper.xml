@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.springpebble.mapper.BoardMapper">
+
+
+    <select id="selectBoard" resultType="board" parameterType="boardSearch">
+        SELECT /* +  BoardMapper.selectBoard + */
+        id, title, content, score, regdate
+        FROM board
+        ORDER BY id DESC LIMIT #{start}, #{pageSize}
+    </select>
+
+    <select id="selectBoardCount" resultType="int">
+        SELECT count(*) FROM board
+    </select>
+
+    <insert id="insertBoard" parameterType="board">
+        INSERT INTO board (title, content, regdate)
+        VALUES (#{title}, #{content}, NOW())
+    </insert>
+
+</mapper>

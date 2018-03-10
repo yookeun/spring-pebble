@@ -1,1 +1,1 @@
-Spring Boot + Security + AOP + Pebble
+Spring Boot + Pebble Template

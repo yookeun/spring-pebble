@@ -1,0 +1,23 @@
+spring:
+  profiles:
+    active: local
+
+---
+spring:
+  profiles: local
+  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test_db?useUnicode=true&characterEncoding=utf8&useSSL=false
+    username: root
+    password: 1234
+    hikari:
+      pool-name: pebble
+      maximum-pool-size: 10
+      max-lifetime: 30
+security:
+  basic:
+    enabled: false
+
+server:
+  context-path: /
